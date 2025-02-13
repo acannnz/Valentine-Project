@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Kuis Dinamis</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                text-align: center;
+                margin: 50px;
+            }
+            #quiz-container {
+                max-width: 400px;
+                margin: auto;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+            }
+            .btn {
+                margin: 10px;
+                padding: 10px 20px;
+                font-size: 16px;
+                cursor: pointer;
+                border: none;
+                border-radius: 5px;
+            }
+            .btn:hover {
+                opacity: 0.8;
+            }
+            .btn-option {
+                background-color: #007bff;
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="quiz-container">
+            <h2 id="question">Loading...</h2>
+            <button id="option1" class="btn btn-option" onclick="nextQuestion(1)">Opsi 1</button>
+            <button id="option2" class="btn btn-option" onclick="nextQuestion(2)">Opsi 2</button>
+            <p id="result"></p>
+        </div>
+
+        <script>
+            let currentStep = 0;
+            let userResponses = [];
+
+            // Daftar pertanyaan dan opsi berdasarkan jawaban
+            function getQuestion(step) {
+                if (step === 0) {
+                    return { text: "Apakah kamu menerima hadiah di hari valentine ini?", options: ["Iya", "Tidak"] };
+                } else if (step === 1) {
+                    return userResponses[0] === 1 ? { text: "Apakah kamu mau menambahnya dengan hadiah kecil dariku?", options: ["Iya", "Tidak"] } : { text: "Apa kamu mengharapkan hadiah dari seseorang?", options: ["Iya", "Tidak"] };
+                } else if (step === 2) {
+                    return userResponses[1] === 1 ? { text: "Cyaaaaaaa", options: ["Lanjut", "Bodoamat"] } : { text: "Walaupun begitu aku akan memberimu sebuah hadiah kecil😆", options: ["Okeeedehhh", "Iyaadehh"] };
+                }
+                return null; // Jika sudah selesai
+            }
+
+            // Menentukan hasil akhir berdasarkan jawaban
+            function getResultMessage() {
+                if (userResponses[0] === 1) {
+                    // Jika menerima hadiah
+                    if (userResponses[1] === 1) {
+                        return "Senang mendengarnya! Semoga hadiah kecil dariku bisa menambah kebahagiaanmu! 🎁😊";
+                    } else {
+                        return "Kamu sudah mendapat hadiah, tapi aku tetap ingin memberikan sesuatu yang spesial! 🎀✨";
+                    }
+                } else {
+                    // Jika tidak menerima hadiah
+                    if (userResponses[1] === 1) {
+                        // Jika mengharapkan hadiah dari seseorang
+                        return "Jangan khawatir, aku akan memberimu hadiah kecil sebagai kejutan! 🎉💝";
+                    } else {
+                        // Jika tidak mengharapkan hadiah
+                        return "Walaupun begitu, aku tetap akan memberikan hadiah kecil untukmu! 😊🎁";
+                    }
+                }
+            }
+
+            // Tampilkan pertanyaan pertama
+            function loadQuestion() {
+                const questionData = getQuestion(currentStep);
+                if (questionData) {
+                    document.getElementById("question").textContent = questionData.text;
+                    document.getElementById("option1").textContent = questionData.options[0];
+                    document.getElementById("option2").textContent = questionData.options[1];
+                } else {
+                    // Menampilkan hasil setelah pertanyaan selesai
+                    document.getElementById("question").textContent = "Terima kasih telah menjawab!";
+                    document.getElementById("option1").style.display = "none";
+                    document.getElementById("option2").style.display = "none";
+                    document.getElementById("result").textContent = getResultMessage();
+                }
+            }
+
+            // Menyimpan jawaban dan lanjut ke pertanyaan berikutnya
+            function nextQuestion(answer) {
+                userResponses[currentStep] = answer;
+                currentStep++;
+                loadQuestion();
+            }
+
+            // Mulai dengan pertanyaan pertama
+            loadQuestion();
+        </script>
+    </body>
+</html>
