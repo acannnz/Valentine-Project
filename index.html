@@ -3,13 +3,14 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Kuis Valentine</title>
+        <title>Hadiah Kecil</title>
         <style>
             body {
                 font-family: "Comic Sans MS", cursive, sans-serif;
                 text-align: center;
                 margin: 50px;
                 background-color: #ffe6e6;
+                overflow: hidden;
             }
             #quiz-container {
                 max-width: 400px;
@@ -20,6 +21,7 @@
                 background-color: #fff0f5;
                 box-shadow: 0 0 15px rgba(255, 77, 77, 0.3);
                 position: relative;
+                z-index: 100;
             }
             h2 {
                 color: #d6336c;
@@ -57,15 +59,74 @@
                 font-size: 30px;
                 color: #ff4d4d;
             }
+            .falling-heart {
+                position: fixed;
+                top: -10px;
+                font-size: 20px;
+                color: red;
+                animation: fall linear infinite;
+            }
+            @keyframes fall {
+                0% {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(100vh);
+                    opacity: 0;
+                }
+            }
+            .btn-next {
+                display: none;
+                margin-top: 20px;
+                background: none;
+                border: none;
+                font-size: 70px;
+                cursor: pointer;
+                color: #d6336c;
+                transition: transform 0.3s;
+                position: absolute;
+                left: 40%;
+            }
+            .btn-next::before {
+                content: "🎁";
+            }
+            .btn-next:hover {
+                transform: scale(1.2);
+            }
+            #result {
+                font-size: 18px;
+                font-weight: bold;
+                color: #d6336c;
+                margin-top: 20px;
+            }
         </style>
     </head>
     <body>
+        <script>
+            function createHeart() {
+                const items = ["❤️", "💌", "❤️", "Happy Valentine"];
+                const randomItem = items[Math.floor(Math.random() * items.length)];
+
+                const heart = document.createElement("div");
+                heart.classList.add("falling-heart");
+                heart.innerHTML = randomItem;
+                heart.style.left = Math.random() * window.innerWidth + "px";
+                heart.style.animationDuration = Math.random() * 3 + 2 + "s";
+                document.body.appendChild(heart);
+                setTimeout(() => {
+                    heart.remove();
+                }, 5000);
+            }
+            setInterval(createHeart, 300);
+        </script>
         <div id="quiz-container">
             <div class="heart">❤️</div>
             <h2 id="question">Loading...</h2>
             <button id="option1" class="btn btn-option" onclick="nextQuestion(1)">Opsi 1</button>
             <button id="option2" class="btn btn-option" onclick="nextQuestion(2)">Opsi 2</button>
             <p id="result"></p>
+            <button id="nextPageButton" class="btn-next" onclick="goToPage()"></button>
         </div>
 
         <script>
@@ -86,15 +147,15 @@
             function getResultMessage() {
                 if (userResponses[0] === 1) {
                     if (userResponses[1] === 1) {
-                        return "Senang mendengarnya! Semoga hadiah kecil dariku bisa menambah kebahagiaanmu! 🎁😊";
+                        return "Senang mendengarnya! Tolong tekan kado yang ada dibawah ini! 🎁😊";
                     } else {
-                        return "Kamu sudah mendapat hadiah, tapi aku tetap ingin memberikan sesuatu yang spesial! 🎀✨";
+                        return "Yayyyy kamu banyak mendapat hadiah, tapi kalau mau tekan tombol kado dibawah ini! 🎀✨";
                     }
                 } else {
                     if (userResponses[1] === 1) {
-                        return "Jangan khawatir, aku akan memberimu hadiah kecil sebagai kejutan! 🎉💝";
+                        return "Ini ada buanga untukmu, tolong tekan tombol kado dibawah! 🎉💝";
                     } else {
-                        return "Walaupun begitu, aku tetap akan memberikan hadiah kecil untukmu! 😊🎁";
+                        return "HAHAHA walaupun begitu, tolong tekan tombol kado dibawah itu! 😊🎁";
                     }
                 }
             }
@@ -110,6 +171,7 @@
                     document.getElementById("option1").style.display = "none";
                     document.getElementById("option2").style.display = "none";
                     document.getElementById("result").textContent = getResultMessage();
+                    document.getElementById("nextPageButton").style.display = "block";
                 }
             }
 
@@ -117,6 +179,9 @@
                 userResponses[currentStep] = answer;
                 currentStep++;
                 loadQuestion();
+            }
+            function goToPage() {
+                window.location.href = "flower.html";
             }
 
             loadQuestion();
