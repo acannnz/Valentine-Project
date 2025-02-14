@@ -75,7 +75,7 @@ body {
 
 @media (max-width: 600px) {
   .typing-container {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     max-width: 90%;
   }
 }
