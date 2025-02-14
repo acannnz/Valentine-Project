@@ -137,9 +137,9 @@
                 if (step === 0) {
                     return { text: "Apakah kamu menerima hadiah di hari valentine ini?", options: ["Iya", "Tidak"] };
                 } else if (step === 1) {
-                    return userResponses[0] === 1 ? { text: "Apakah kamu mau menambahnya dengan hadiah kecil dariku?", options: ["Iya", "Tidak"] } : { text: "Apa kamu mengharapkan hadiah dari seseorang?", options: ["Iya", "Tidak"] };
+                    return userResponses[0] === 1 ? { text: "Apakah kamu juga mau menerima hadiah kecil?", options: ["Iya", "Tidak"] } : { text: "Apa kamu mengharapkan hadiah dari seseorang?", options: ["Iya", "Tidak"] };
                 } else if (step === 2) {
-                    return userResponses[1] === 1 ? { text: "Cyaaaaaaa", options: ["Lanjut", "Bodoamat"] } : { text: "Walaupun begitu aku akan memberimu sebuah hadiah kecil😆", options: ["Okeeedehhh", "Iyaadehh"] };
+                    return userResponses[1] === 1 ? { text: "😁😁😁😁😁😁😁😁😁😁😁", options: ["Lanjut", "Bodoamat"] } : { text: "Walaupun begitu aku akan memberimu sebuah hadiah kecil😆", options: ["Okeeedehhh", "Iyaadehh"] };
                 }
                 return null;
             }

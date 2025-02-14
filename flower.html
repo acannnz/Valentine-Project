@@ -5,10 +5,31 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="flower.css" />
-        <link rel="icon" href="img/flowers.png" type="image/x-icon" />
         <title>flowers</title>
     </head>
     <body class="container">
+        <audio id="bg-music" loop muted>
+            <source src="sound/backsound.mpeg" type="audio/mpeg" />
+            Your browser does not support the audio element.
+        </audio>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                let audio = document.getElementById("bg-music");
+                audio.muted = false;
+                let playAudio = () => {
+                    audio.play().catch(() => {
+                        document.body.addEventListener("click", () => audio.play(), { once: true });
+                    });
+                };
+                playAudio();
+            });
+        </script>
+        <div class="typing-container">
+            <span class="typing-text"
+                >Di hari kasih sayang ini, semoga kamu dikelilingi oleh <br />
+                orang-orang yang menyayangimu. Selamat Hari Valentine!</span
+            >
+        </div>
         <!-- Credit: https://codepen.io/mdusmanansari/pen/BamepLe -->
         <div class="night"></div>
         <div class="flowers">

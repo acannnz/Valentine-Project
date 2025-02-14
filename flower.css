@@ -20,6 +20,66 @@ body {
   perspective: 1000px;
 }
 
+
+.typing-container {
+  z-index: 1000;
+  color: white;
+  position: absolute;
+  top: 10%;
+  font-size: 20px;
+  max-width: 90%;
+  width: fit-content;
+  padding: 10px;
+}
+
+.typing-text::after {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 20px;
+  background-color: rgb(165, 23, 193);
+  animation: blink 0.8s infinite;
+}
+
+@keyframes blink {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+
+.typing-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 0;
+  animation: typing 4s steps(50, end) forwards;
+  animation-delay: 3s;
+
+}
+
+@media (max-width: 600px) {
+  .typing-container {
+    font-size: 0.9rem;
+    max-width: 90%;
+  }
+}
+
 .night {
   position: fixed;
   left: 50%;
