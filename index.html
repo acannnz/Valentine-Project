@@ -89,7 +89,7 @@
                 left: 40%;
             }
             .btn-next::before {
-                content: "🎁";
+                content: "❤️";
             }
             .btn-next:hover {
                 transform: scale(1.2);
@@ -171,7 +171,7 @@
                     document.getElementById("option1").textContent = questionData.options[0];
                     document.getElementById("option2").style.display = "none";
                 } else {
-                    document.getElementById("question").textContent = "Terima kasih telah menjawab!";
+                    document.getElementById("question").textContent = "";
                     document.getElementById("option1").style.display = "none";
                     document.getElementById("option2").style.display = "none";
                     document.getElementById("result").textContent = getResultMessage();
