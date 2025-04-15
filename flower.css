@@ -10,6 +10,7 @@
   --dark-color: #000;
 }
 
+
 body {
   display: flex;
   align-items: flex-end;
@@ -20,6 +21,12 @@ body {
   perspective: 1000px;
 }
 
+
+@media (max-width: 768px) {
+  body {
+    min-height: 80vh;
+  }
+}
 
 .typing-container {
   z-index: 1000;
