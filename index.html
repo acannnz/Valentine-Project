@@ -105,7 +105,7 @@
     <body>
         <script>
             function createHeart() {
-                const items = ["❤️", "💌", "❤️", "Happy Valentine"];
+                const items = ["❤️", "💌", "❤️"];
                 const randomItem = items[Math.floor(Math.random() * items.length)];
 
                 const heart = document.createElement("div");
@@ -135,11 +135,15 @@
 
             function getQuestion(step) {
                 if (step === 0) {
-                    return { text: "Apakah kamu menerima hadiah di hari valentine ini?", options: ["Iya", "Tidak"] };
+                    return { text: "Jadiiii... sudah beberapa hari sejak kita kenalan, yang kita tahu alasan pertamanya karena kedua orang tua kita itu cuman bercanda😂", options: ["Lanjut.."] };
                 } else if (step === 1) {
-                    return userResponses[0] === 1 ? { text: "Apakah kamu juga mau menerima hadiah kecil?", options: ["Iya", "Tidak"] } : { text: "Apa kamu mengharapkan hadiah dari seseorang?", options: ["Iya", "Tidak"] };
+                    return { text: "Setiap harinya kita selalu saling bertukar pesan, membahas hal apapun itu mau serius ataupun hal yang lucu, sesekali juga membahas sebuah topik yang amat sangat sangat serius🤣", options: ["Lanjut.."] };
                 } else if (step === 2) {
-                    return userResponses[1] === 1 ? { text: "😁😁😁😁😁😁😁😁😁😁😁", options: ["Lanjut", "Bodoamat"] } : { text: "Walaupun begitu aku akan memberimu sebuah hadiah kecil😆", options: ["Okeeedehhh", "Iyaadehh"] };
+                    return { text: "Tidak terasa waktu sudah berjalan kurang lebih 2 minggu sejak pertama kali kita kenal, mungkin kamu merasa bingung, kok bisa yaaa? kita menjadi sedekat ini wkwkwk", options: ["Lanjut.."] };
+                } else if (step === 3) {
+                    return userResponses[1] === 1 ? { text: "Mungkin waktunya lumayan singkat, tapi perasaan ini tidak bisa berbohong aku ingin sekali menjadikan dirimu ini sebagai orang yang paling spesial didalam hidupku", options: ["Lanjut", "Bodoamat"] } : { text: "Walaupun begitu aku akan memberimu sebuah hadiah kecil😆", options: ["Okeeedehhh", "Iyaadehh"] };
+                } else if (step === 4) {
+                    return userResponses[1] === 1 ? { text: "Dari lubuk hatiku yang paling dalam, aku ingin bertanya... bersediakah kamu menjadi seseorang yang sangat spesial dalam hidupku? Dengan kata lain, maukah kamu menjadi pacarku? ☺️", options: ["Lanjut", "Bodoamat"] } : { text: "Walaupun begitu aku akan memberimu sebuah hadiah kecil😆", options: ["Okeeedehhh", "Iyaadehh"] };
                 }
                 return null;
             }
@@ -147,7 +151,7 @@
             function getResultMessage() {
                 if (userResponses[0] === 1) {
                     if (userResponses[1] === 1) {
-                        return "Senang mendengarnya! Tolong tekan kado yang ada dibawah ini! 🎁😊";
+                        return "Senang mendengar jawabanmu! Aku ada hadiah virtual yang ingin kuberikan untukmu 🎁😊";
                     } else {
                         return "Yayyyy kamu banyak mendapat hadiah, tapi kalau mau tekan tombol kado dibawah ini! 🎀✨";
                     }
@@ -165,7 +169,7 @@
                 if (questionData) {
                     document.getElementById("question").textContent = questionData.text;
                     document.getElementById("option1").textContent = questionData.options[0];
-                    document.getElementById("option2").textContent = questionData.options[1];
+                    document.getElementById("option2").style.display = "none";
                 } else {
                     document.getElementById("question").textContent = "Terima kasih telah menjawab!";
                     document.getElementById("option1").style.display = "none";
